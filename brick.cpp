@@ -17,7 +17,9 @@ Brick::~Brick(){
 void Brick::paint(){
 
     glBegin(GL_QUADS);
-    glColor3ub(0,0,255); glVertex3f(x_, y_, -5.0f); glVertex3f( x_+BRICK_WIDTH, y_, -5.0f);
+
+    glColor3ub(255,255,255); // c'est ce paramètre qui choisi la couleur de la face avant visible
+    glVertex3f(x_, y_, -5.0f); glVertex3f( x_+BRICK_WIDTH, y_, -5.0f);
     glVertex3f( x_+BRICK_WIDTH, y_+BRICK_HEIGHT, -5.0f);
     glVertex3f(x_, y_+BRICK_HEIGHT, -5.0f);
 

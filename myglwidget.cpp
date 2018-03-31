@@ -32,16 +32,16 @@ void MyGLWidget::initializeGL()
     glEnable(GL_DEPTH_TEST);
 
     // Reglage de la lampe
-    glEnable(GL_LIGHT0);
+    //glEnable(GL_LIGHT0);
     //Couleur de l'éclairage
-    GLfloat lampe []={1.0,1.0,1.0,1.0};
-    glLightfv(GL_LIGHT0,GL_AMBIENT_AND_DIFFUSE,lampe);
+    //GLfloat lampe []={1.0,1.0,1.0,1.0};
+    //glLightfv(GL_LIGHT0,GL_AMBIENT_AND_DIFFUSE,lampe);
     //Position de la lampe
-    GLfloat position []={0.0,0.0,0.0,1.0};
-    glLightfv(GL_LIGHT0,GL_POSITION,position);
+    //GLfloat position []={0.0,0.0,0.0,1.0};
+    //glLightfv(GL_LIGHT0,GL_POSITION,position);
 
     // Activation de la lumiere
-    glEnable(GL_LIGHTING);
+    //glEnable(GL_LIGHTING);
 
     // Création de la scène
 
@@ -73,7 +73,7 @@ void MyGLWidget::initializeGL()
     scene_.push_back(myPuck_);
 
     //Déclaration et ajout de la balle à la scène
-    //scene_.push_back(new Ball(0.5,255,255,0));
+    scene_.push_back(new Ball(0.5,255,255,0));
 
 }
 
@@ -112,11 +112,9 @@ void MyGLWidget::paintGL()
     for (Object* obj : scene_){
         obj->paint();
     }
-    glPushMatrix();
-    for  (Object* bal:balls_){
-        bal->paint();
-    }
-    glPopMatrix();
+
+
+
 }
 
 // Fonction de gestion d'interactions clavier
