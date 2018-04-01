@@ -4,6 +4,7 @@
 #include <QGLWidget>
 #include <vector>
 #include <QKeyEvent>
+#include <QTimer>
 #include "ball.h"
 #include "puck.h"
 #include "object.h"
@@ -22,6 +23,8 @@ public:
     // Constructeur
     MyGLWidget(QWidget * parent = nullptr);
 
+    std::vector<Object*> getScene(){return scene_;}
+
 
 
 protected:
@@ -39,6 +42,11 @@ protected:
 
 
 private:
+    // Timer d'animation
+    float m_TimeElapsed { 0.0f };
+    QTimer m_AnimationTimer;
+    int score_;
+
     std::vector<Ball*> balls_;
     std::vector<Brick*> bricks_;
     Puck* myPuck_;

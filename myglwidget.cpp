@@ -15,10 +15,21 @@ const unsigned int WIN_HEIGHT = 768;
 // Constructeur
 MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
 {
+    //Initialisation du score à zéro
+    score_=0;
+
     // Reglage de la taille/position
     setFixedSize(WIN_WIDTH, WIN_HEIGHT);
     move(QApplication::desktop()->screen()->rect().center() - rect().center());
 
+    // Connexion du timer
+    connect(&m_AnimationTimer,  &QTimer::timeout, [&] {
+        m_TimeElapsed += 1.0f / 10.0f;
+        updateGL();
+    });
+
+    m_AnimationTimer.setInterval(10);
+    m_AnimationTimer.start();
 }
 
 
@@ -110,8 +121,62 @@ void MyGLWidget::paintGL()
 
 
     for (Object* obj : scene_){
-        obj->paint();
+        if (obj->getType()==0){ //si l'objet est une balle
+            //Gestion de la collision avec les murs
+            if (obj->getY()>-0.5){
+                obj->changeDirectY();
+            }
+            if (obj->getY()<-49.5){
+                obj->changeDirectY();
+            }
+            if (obj->getX()<0.5){
+                obj->changeDirectX();
+            }
+            if (obj->getX()>40.5){
+                obj->changeDirectX();
+            }
+
+            std::vector<Object*>::iterator it;
+            //Gestion de la collision avec les briques
+            for (it=scene_.begin();it!=scene_.end();++it){
+                if ((*it)->getType()==1){
+                    // la balle tape en dessous de la brique
+                    if (obj->getY()>=(*it)->getY()-0.5 && obj->getY()<=(*it)->getY()+0.5
+                            && obj->getX()>=(*it)->getX() && obj->getX()<=(*it)->getX()+3.0 ){
+                        obj->changeDirectY();
+                        scene_.erase(it);
+                        score_+=1;
+                    }
+                    // la balle tape au dessus de la brique
+                    if (obj->getY()>=(*it)->getY()+1.5 && obj->getY()<=(*it)->getY()+0.5
+                            && obj->getX()>=(*it)->getX() && obj->getX()<=(*it)->getX()+3.0 ){
+                        obj->changeDirectY();
+                        scene_.erase(it);
+                        score_+=1;
+                    }
+                    //la balle tape sur le côté gauche
+                    if (obj->getY()>=(*it)->getY()-0.5 && obj->getY()<=(*it)->getY()+1.5
+                            && obj->getX()>=(*it)->getX()-0.5 && obj->getX()<=(*it)->getX()){
+                        obj->changeDirectX();
+                        scene_.erase(it);
+                        score_+=1;
+                    }
+                    //la balle tape sur le côté droit
+                    if (obj->getY()>=(*it)->getY()-0.5 && obj->getY()<=(*it)->getY()+1.5
+                            && obj->getX()>=(*it)->getX()+3.0 && obj->getX()<=(*it)->getX()+3.5){
+                        obj->changeDirectX();
+                        scene_.erase(it);
+                        score_+=1;
+                    }
+
+                }
+            }
+        }
+        QString scoreText = QString::number(score_);
+        renderText(2,-48,0,"Score : "+scoreText);
+        obj->paint(m_TimeElapsed);
     }
+
 
 
 
@@ -137,13 +202,13 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
     case Qt::LeftArrow:
     {
         std::cout<<"left"<<std::endl;
-        myPuck_->setX(myPuck_->getX()-1);
+        //myPuck_->setX(myPuck_->getX()-1);
         break;
 
     }
     case Qt::RightArrow:
     {
-        myPuck_->setX(myPuck_->getX()+1);
+        //myPuck_->setX(myPuck_->getX()+1);
         break;
     }
         // Cas par defaut

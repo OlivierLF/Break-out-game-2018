@@ -5,8 +5,14 @@
 
 Wall::Wall(float x, float y, bool lat):Object()
 {
+    //Type = brick = 3
+    type_=3;
+
+    //Position du coin inf droit d'un mur
     x_=x;
     y_=y;
+
+    //Côté latéral ou non
     lat_=lat;
 }
 
@@ -14,7 +20,7 @@ Wall::~Wall(){
     delete this;
 }
 
-void Wall::paint(){
+void Wall::paint(float m_TimeElapsed){
 
     //mur du dessus ou dessous
     float WALL_WIDTH=61.0;

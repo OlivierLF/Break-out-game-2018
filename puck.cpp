@@ -8,6 +8,10 @@ const float PUCK_HEIGHT=1.0;
 
 Puck::Puck(float x, float y):Object()
 {
+    //Type = puck = 2
+    type_=2;
+
+    //Position du coin inf droit d'un palet
     x_=x;
     y_=y;
 }
@@ -16,7 +20,7 @@ Puck::~Puck(){
     delete this;
 }
 
-void Puck::paint(){
+void Puck::paint(float m_TimeElapsed){
     glBegin(GL_QUADS);
 
     glColor3ub(255,255,255); // c'est ce paramètre qui choisi la couleur de la face avant visible
@@ -46,10 +50,3 @@ void Puck::paint(){
     glEnd();
 }
 
-float Puck::getX(){
-    return x_;
-}
-
-void Puck::setX(float x){
-    x_=x;
-}

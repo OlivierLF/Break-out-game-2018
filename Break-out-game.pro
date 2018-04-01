@@ -21,7 +21,6 @@ TARGET 	  = Break-out-game
 
 # fichiers sources/headers/ressources
 SOURCES += main.cpp \
-    game.cpp \
     object.cpp \
     brick.cpp \
     ball.cpp \
@@ -30,7 +29,6 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     puck.cpp
 HEADERS += \
-    game.h \
     object.h \
     brick.h \
     ball.h \

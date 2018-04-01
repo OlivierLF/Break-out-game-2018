@@ -9,6 +9,6 @@ Object::~Object() {
 
 }
 
-void Object::paint(){
+void Object::paint(float m_TimeElapsed){
 
 }

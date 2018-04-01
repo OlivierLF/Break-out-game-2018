@@ -6,6 +6,10 @@ const float BRICK_HEIGHT=1.0;
 
 Brick::Brick(float x, float y):Object()
 {
+    //Type = brick = 1
+    type_=1;
+
+    //Position du coin inf droit d'une brique
     x_=x;
     y_=y;
 }
@@ -14,7 +18,7 @@ Brick::~Brick(){
     delete this;
 }
 
-void Brick::paint(){
+void Brick::paint(float m_TimeElapsed){
 
     glBegin(GL_QUADS);
 

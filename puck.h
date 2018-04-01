@@ -9,13 +9,15 @@ class Puck: public Object
 public:
     Puck(float x, float y);
     virtual ~Puck();
-    virtual void paint();
-    float getX();
-    void setX(float x);
+    virtual void paint(float m_TimeElapsed);
+    virtual int getType(){return type_;}
+    virtual float getX(){return x_;}
+    virtual float getY(){return y_;}
+    virtual void setX(float x){x_=x;}
+    virtual void setY(float y){y_=y;}
+    virtual void changeDirectX(){}
+    virtual void changeDirectY(){}
 
-private:
-    float x_;
-    float y_;
 };
 
 #endif // PUCK_H
