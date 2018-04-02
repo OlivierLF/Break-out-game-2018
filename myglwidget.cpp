@@ -80,8 +80,8 @@ void MyGLWidget::initializeGL()
     }
 
     //Déclaration et ajout du palet à la scène
-    myPuck_=new Puck(10,-48);
-    scene_.push_back(myPuck_);
+
+    scene_.push_back(new Puck(20,-48));
 
     //Déclaration et ajout de la balle à la scène
     scene_.push_back(new Ball(0.5,255,255,0));
@@ -137,9 +137,9 @@ void MyGLWidget::paintGL()
             }
 
             std::vector<Object*>::iterator it;
-            //Gestion de la collision avec les briques
+            //Gestion de la collision avec les briques et le palet
             for (it=scene_.begin();it!=scene_.end();++it){
-                if ((*it)->getType()==1){
+                if ((*it)->getType()==1){ //collision avec une brique
                     // la balle tape en dessous de la brique
                     if (obj->getY()>=(*it)->getY()-0.5 && obj->getY()<=(*it)->getY()+0.5
                             && obj->getX()>=(*it)->getX() && obj->getX()<=(*it)->getX()+3.0 ){
@@ -148,7 +148,7 @@ void MyGLWidget::paintGL()
                         score_+=1;
                     }
                     // la balle tape au dessus de la brique
-                    if (obj->getY()>=(*it)->getY()+1.5 && obj->getY()<=(*it)->getY()+0.5
+                    if (obj->getY()>=(*it)->getY()+0.5 && obj->getY()<=(*it)->getY()+1.5
                             && obj->getX()>=(*it)->getX() && obj->getX()<=(*it)->getX()+3.0 ){
                         obj->changeDirectY();
                         scene_.erase(it);
@@ -168,60 +168,49 @@ void MyGLWidget::paintGL()
                         scene_.erase(it);
                         score_+=1;
                     }
-
+                }
+                if ((*it)->getType()==2){ //collision avec le palet
+                    // la balle tape au dessus du palet
+                    if (obj->getY()>=(*it)->getY()+0.5 && obj->getY()<=(*it)->getY()+1.5
+                            && obj->getX()>=(*it)->getX() && obj->getX()<=(*it)->getX()+5.0 ){
+                        obj->changeDirectY();
+                    }
                 }
             }
         }
         QString scoreText = QString::number(score_);
-        renderText(2,-48,0,"Score : "+scoreText);
+        renderText(1,-49,0,"Score : "+scoreText);
         obj->paint(m_TimeElapsed);
     }
-
-
-
-
 }
 
 // Fonction de gestion d'interactions clavier
 void MyGLWidget::keyPressEvent(QKeyEvent * event)
 {
-    std::cout<<"actif"<<std::endl;
-    switch(event->key())
-    {
-    // Activation/Arret de l'animation
-    case Qt::Key_Space:
-    {
-        break;
-    }
-
-    // Sortie de l'application
-    case Qt::Key_Escape:
-    {
-        exit(0);
-    }
-    case Qt::LeftArrow:
-    {
-        std::cout<<"left"<<std::endl;
-        //myPuck_->setX(myPuck_->getX()-1);
-        break;
-
-    }
-    case Qt::RightArrow:
-    {
-        //myPuck_->setX(myPuck_->getX()+1);
-        break;
-    }
-        // Cas par defaut
-    default:
-    {
-        // Ignorer l'evenement
-        event->ignore();
-        return;
-    }
-    }
-
-    // Acceptation de l'evenement et mise a jour de la scene
-    event->accept();
-    updateGL();
 }
 
+
+void MyGLWidget::moveLeft(){
+    std::vector<Object*>::iterator it;
+    for (it=scene_.begin();it!=scene_.end();++it){
+        if ((*it)->getType()==2){ //Si l'objet est un palet
+            //Condition pour ne pas faire sortir le palet de la partie jouable
+            if ((*it)->getX() > 0){
+                (*it)->setX((*it)->getX()-1);
+            }
+
+        }
+    }
+}
+
+void MyGLWidget::moveRight(){
+    std::vector<Object*>::iterator it;
+    for (it=scene_.begin();it!=scene_.end();++it){
+        if ((*it)->getType()==2){ //Si l'objet est un palet
+            //Condition pour ne pas faire sortir le palet de la partie jouable
+            if ((*it)->getX() <36){ //largeur (41) - taille du palet (5) = 35
+                (*it)->setX((*it)->getX()+1);
+            }
+        }
+    }
+}

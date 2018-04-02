@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "myglwidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,8 +17,11 @@ public:
     ~MainWindow();
     float getHeight();
     float getWidth();
+    void keyPressEvent(QKeyEvent * event);
+
 
 private:
+    MyGLWidget* glWidget;
     Ui::MainWindow *ui;
 
 };

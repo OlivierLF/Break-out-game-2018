@@ -41,8 +41,8 @@ void Ball::paint(float m_TimeElapsed){
     glTranslatef(x_+direction_[0]*0.1f,y_+direction_[1]*0.1f,0);
 
     //Mise a jour des coordonnees de la balle
-    x_=x_+direction_[0]*0.1f;
-    y_=y_+direction_[1]*0.1f;
+    x_=x_+direction_[0]*0.2f;
+    y_=y_+direction_[1]*0.2f;
 
     //Déclaration de la quadrique
     quadrique_=gluNewQuadric();

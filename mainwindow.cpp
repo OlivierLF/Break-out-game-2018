@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,4 +20,44 @@ float MainWindow::getHeight(){
 
 float MainWindow::getWidth(){
     return this->width();
+}
+
+// Fonction de gestion d'interactions clavier
+void MainWindow::keyPressEvent(QKeyEvent * event)
+{
+    switch(event->key())
+    {
+    // Activation/Arret de l'animation
+    case Qt::Key_Space:
+    {
+        break;
+    }
+    case 16777234: //Flèche gauche
+    {
+        ui->glWidget->moveLeft();
+        break;
+    }
+    case 16777236: //Flèche droite
+    {
+        ui->glWidget->moveRight();
+        break;
+    }
+
+        // Sortie de l'application
+    case Qt::Key_Escape:
+    {
+        exit(0);
+    }
+
+        // Cas par defaut
+    default:
+    {
+        // Ignorer l'evenement
+        event->ignore();
+        return;
+    }
+    }
+
+    // Acceptation de l'evenement et mise a jour de la scene
+
 }

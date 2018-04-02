@@ -1,8 +1,10 @@
 #include "brick.h"
 #include "object.h"
 
+
 const float BRICK_WIDTH=3.0;
 const float BRICK_HEIGHT=1.0;
+
 
 Brick::Brick(float x, float y):Object()
 {
