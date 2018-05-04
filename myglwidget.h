@@ -29,6 +29,8 @@ public:
     void moveLeft();
     //Mouvement du palet vers la droite
     void moveRight();
+    //Activer mouvement ou non de la balle
+    void changeBallMovement();
 
 
 

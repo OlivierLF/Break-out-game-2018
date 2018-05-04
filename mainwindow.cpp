@@ -30,6 +30,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     // Activation/Arret de l'animation
     case Qt::Key_Space:
     {
+        ui->glWidget->changeBallMovement();
         break;
     }
     case 16777234: //Flèche gauche

@@ -9,8 +9,10 @@
 #include <GL/glu.h>
 
 // Declarations des constantes
-const unsigned int WIN_WIDTH  = 1366;
-const unsigned int WIN_HEIGHT = 768;
+const unsigned int WIN_WIDTH  = 700;
+const unsigned int WIN_HEIGHT = 720;
+
+bool oneBallTest = true;
 
 // Constructeur
 MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
@@ -84,7 +86,7 @@ void MyGLWidget::initializeGL()
     scene_.push_back(new Puck(20,-48));
 
     //Déclaration et ajout de la balle à la scène
-    scene_.push_back(new Ball(0.5,255,255,0));
+    scene_.push_back(new Ball(22.5, -46.5, 0.5,255,255,0));
 
 }
 
@@ -123,17 +125,31 @@ void MyGLWidget::paintGL()
     for (Object* obj : scene_){
         if (obj->getType()==0){ //si l'objet est une balle
             //Gestion de la collision avec les murs
-            if (obj->getY()>-0.5){
+            if (obj->getY()>-0.5){ //mur du haut
                 obj->changeDirectY();
+            }
+            if (obj->getX()<0.5){ //mur de gauche
+                obj->changeDirectX();
+            }
+            if (obj->getX()>40.5){ //mur de droite
+                obj->changeDirectX();
             }
             if (obj->getY()<-49.5){
                 obj->changeDirectY();
-            }
-            if (obj->getX()<0.5){
-                obj->changeDirectX();
-            }
-            if (obj->getX()>40.5){
-                obj->changeDirectX();
+                /*
+                float newBallX;
+                float newBallY;
+                std::vector<Object*>::iterator it;
+                for (it=scene_.begin();it!=scene_.end();++it){
+                    if ((*it)->getType()==0 && oneBallTest){ //la balle tombe à côté du palet
+                        //oneBallTest= !oneBallTest;
+                    }
+                    if ((*it)->getType()==2){ //si c'est un palet on enregistre la position pour y mettre une nouvelle balle
+                        newBallX= 2.5 + (*it)->getX();
+                        newBallY= 1.5 + (*it)->getY();
+                    }
+                }*/
+
             }
 
             std::vector<Object*>::iterator it;
@@ -154,14 +170,14 @@ void MyGLWidget::paintGL()
                         scene_.erase(it);
                         score_+=1;
                     }
-                    //la balle tape sur le côté gauche
+                    //la balle tape sur le côté gauche de la brique
                     if (obj->getY()>=(*it)->getY()-0.5 && obj->getY()<=(*it)->getY()+1.5
                             && obj->getX()>=(*it)->getX()-0.5 && obj->getX()<=(*it)->getX()){
                         obj->changeDirectX();
                         scene_.erase(it);
                         score_+=1;
                     }
-                    //la balle tape sur le côté droit
+                    //la balle tape sur le côté droit de la brique
                     if (obj->getY()>=(*it)->getY()-0.5 && obj->getY()<=(*it)->getY()+1.5
                             && obj->getX()>=(*it)->getX()+3.0 && obj->getX()<=(*it)->getX()+3.5){
                         obj->changeDirectX();
@@ -173,7 +189,10 @@ void MyGLWidget::paintGL()
                     // la balle tape au dessus du palet
                     if (obj->getY()>=(*it)->getY()+0.5 && obj->getY()<=(*it)->getY()+1.5
                             && obj->getX()>=(*it)->getX() && obj->getX()<=(*it)->getX()+5.0 ){
-                        obj->changeDirectY();
+                        float D = (obj->getX()-(*it)->getX()-2.5)*20; //angle en degrés
+                        float pi =3.1415;
+                        D = D*pi/180; // angle en rad
+                        obj->setDirection(cos(pi/2-D), sin(pi/2-D));
                     }
                 }
             }
@@ -211,6 +230,15 @@ void MyGLWidget::moveRight(){
             if ((*it)->getX() <36){ //largeur (41) - taille du palet (5) = 35
                 (*it)->setX((*it)->getX()+1);
             }
+        }
+    }
+}
+
+void MyGLWidget::changeBallMovement(){
+    std::vector<Object*>::iterator it;
+    for (it=scene_.begin();it!=scene_.end();++it){
+        if ((*it)->getType()==0){ //Si l'objet est une balle
+            (*it)->ballMovement();
         }
     }
 }

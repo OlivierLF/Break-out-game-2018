@@ -7,7 +7,7 @@
 class Ball : public Object
 {
 public:
-    Ball(float rad, float r, float g, float b);
+    Ball(float x, float y, float rad, float r, float g, float b);
     virtual ~Ball();
     virtual void paint(float m_TimeElapsed);
     virtual int getType(){return type_;}
@@ -17,6 +17,8 @@ public:
     virtual void setY(float y){y_=y;}
     virtual void changeDirectX(){direction_[0]=-direction_[0];}
     virtual void changeDirectY(){direction_[1]=-direction_[1];}
+    virtual void setDirection(float x, float y);
+    virtual void ballMovement(){moveTest_= !moveTest_;}
 
 private:
     float red_;
@@ -25,6 +27,7 @@ private:
     float rad_;
     GLUquadric* quadrique_;
     float direction_[2];
+    bool moveTest_;
 };
 
 #endif // BALL_H

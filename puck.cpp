@@ -23,7 +23,7 @@ Puck::~Puck(){
 void Puck::paint(float m_TimeElapsed){
     glBegin(GL_QUADS);
 
-    glColor3ub(255,255,255); // c'est ce paramètre qui choisi la couleur de la face avant visible
+    glColor3ub(255,255,255); // c'est ce paramètre qui choisit la couleur de la face avant visible
     glVertex3f(x_, y_, -5.0f); glVertex3f( x_+PUCK_WIDTH, y_, -5.0f);
     glVertex3f( x_+PUCK_WIDTH, y_+PUCK_HEIGHT, -5.0f);
     glVertex3f(x_, y_+PUCK_HEIGHT, -5.0f);

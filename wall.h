@@ -16,6 +16,8 @@ public:
     virtual void setY(float y){y_=y;}
     virtual void changeDirectX(){}
     virtual void changeDirectY(){}
+    virtual void setDirection(float x, float y){}
+    virtual void ballMovement(){}
 
 private:
     bool lat_;
