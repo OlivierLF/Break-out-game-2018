@@ -19,6 +19,8 @@ MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
 {
     //Initialisation du score à zéro
     score_=0;
+    //Initialisation de la vie à 3
+    life_=3;
 
     // Reglage de la taille/position
     setFixedSize(WIN_WIDTH, WIN_HEIGHT);
@@ -57,7 +59,7 @@ void MyGLWidget::initializeGL()
     //glEnable(GL_LIGHTING);
 
     // Création de la scène
-
+    /*
     //Déclaration des murs
     Wall* top = new Wall(-10.0,0.0,false);
     Wall* bot = new Wall(-10.0,-60.0,false);
@@ -87,7 +89,8 @@ void MyGLWidget::initializeGL()
 
     //Déclaration et ajout de la balle à la scène
     scene_.push_back(new Ball(22.5, -46.5, 0.5,255,255,0));
-
+*/
+    init();
 }
 
 
@@ -124,6 +127,20 @@ void MyGLWidget::paintGL()
 
     for (Object* obj : scene_){
         if (obj->getType()==0){ //si l'objet est une balle
+            if (!obj->getBallMovementTest()){
+                renderText(11,-25,0,"Appuyer sur Espace pour démarrer");
+            }
+            std::vector<Object*>::iterator it1;
+            if(!obj->getBallMovementTest()){ //Fait en sorte d'avoir la balle collée au palet avant de la lancer
+                for (it1=scene_.begin();it1!=scene_.end();++it1){
+                    if ((*it1)->getType()== 2){ //la balle tombe à côté du palet
+                        obj->setX((*it1)->getX()+2.5);
+                        obj->setY((*it1)->getY()+1.5);
+                    }
+                }
+            }
+
+
             //Gestion de la collision avec les murs
             if (obj->getY()>-0.5){ //mur du haut
                 obj->changeDirectY();
@@ -134,21 +151,16 @@ void MyGLWidget::paintGL()
             if (obj->getX()>40.5){ //mur de droite
                 obj->changeDirectX();
             }
-            if (obj->getY()<-49.5){
-                obj->changeDirectY();
-                /*
-                float newBallX;
-                float newBallY;
-                std::vector<Object*>::iterator it;
-                for (it=scene_.begin();it!=scene_.end();++it){
-                    if ((*it)->getType()==0 && oneBallTest){ //la balle tombe à côté du palet
-                        //oneBallTest= !oneBallTest;
+            if (obj->getY()<-49.5){ //correspond à la balle qui tombe sur le mur inférieur
+                std::vector<Object*>::iterator ite;
+                for (ite=scene_.begin();ite!=scene_.end();++ite){
+                    if ((*ite)->getType()== 2){
+                        obj->setX((*ite)->getX()+2.5);
+                        obj->setY((*ite)->getY()+1.5);
+                        obj->ballMovement();
+                        life_-=1;
                     }
-                    if ((*it)->getType()==2){ //si c'est un palet on enregistre la position pour y mettre une nouvelle balle
-                        newBallX= 2.5 + (*it)->getX();
-                        newBallY= 1.5 + (*it)->getY();
-                    }
-                }*/
+                }
 
             }
 
@@ -198,7 +210,10 @@ void MyGLWidget::paintGL()
             }
         }
         QString scoreText = QString::number(score_);
-        renderText(1,-49,0,"Score : "+scoreText);
+        renderText(1,-47,0,"Score : "+scoreText);
+        QString lifeText = QString::number(life_);
+        renderText(37,-47,0,"Vie : "+lifeText);
+        renderText(1,-49, 0,"Entrée = Nouvelle partie");
         obj->paint(m_TimeElapsed);
     }
 }
@@ -240,5 +255,56 @@ void MyGLWidget::changeBallMovement(){
         if ((*it)->getType()==0){ //Si l'objet est une balle
             (*it)->ballMovement();
         }
+    }
+}
+
+void MyGLWidget::init(){
+
+    score_=0;
+    life_=3;
+
+    //Déclaration des murs
+    Wall* top = new Wall(-10.0,0.0,false);
+    Wall* bot = new Wall(-10.0,-60.0,false);
+    Wall* left = new Wall(-10.0,-50.0,true);
+    Wall* right = new Wall(41.0,-50.0,true);
+
+    //Ajout des murs aux éléments de la scène
+    scene_.push_back(top);
+    scene_.push_back(bot);
+    scene_.push_back(left);
+    scene_.push_back(right);
+
+    //Ajout des briques dans la scène
+    int x=1;
+    while (x<=37){
+        int y=-2;
+        while (y>=-23){
+            scene_.push_back(new Brick(x,y));
+            y=y-2;
+        }
+        x=x+4;
+    }
+
+    //Déclaration et ajout du palet à la scène
+
+    scene_.push_back(new Puck(20,-48));
+
+    //Déclaration et ajout de la balle à la scène
+    scene_.push_back(new Ball(22.5, -46.5, 0.5,255,255,0));
+}
+
+void MyGLWidget::restart(){
+    cleanScene();
+    score_=0;
+    life_=3;
+    std::cout<<"size "<<scene_.size()<<std::endl;
+    init();
+    std::cout<<"size "<<scene_.size()<<std::endl;
+}
+
+void MyGLWidget::cleanScene(){
+    while (!scene_.empty()){
+        scene_.pop_back();
     }
 }

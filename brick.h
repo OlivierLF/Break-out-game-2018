@@ -18,6 +18,9 @@ public:
     virtual void changeDirectY(){}
     virtual void setDirection(float x, float y){}
     virtual void ballMovement(){}
+    virtual bool getBallMovementTest(){}
+
+
 
 };
 

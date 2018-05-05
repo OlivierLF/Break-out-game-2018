@@ -19,6 +19,8 @@ public:
     virtual void changeDirectY(){direction_[1]=-direction_[1];}
     virtual void setDirection(float x, float y);
     virtual void ballMovement(){moveTest_= !moveTest_;}
+    virtual bool getBallMovementTest(){return moveTest_;}
+
 
 private:
     float red_;
@@ -28,6 +30,7 @@ private:
     GLUquadric* quadrique_;
     float direction_[2];
     bool moveTest_;
+    bool displayBall_;
 };
 
 #endif // BALL_H

@@ -31,7 +31,12 @@ public:
     void moveRight();
     //Activer mouvement ou non de la balle
     void changeBallMovement();
-
+    //Initialise la scène
+    void init();
+    //Réinitialise la scène
+    void restart();
+    //Nettoie la scene de tous ses éléments
+    void cleanScene();
 
 
 protected:
@@ -50,6 +55,7 @@ private:
     float m_TimeElapsed { 0.0f };
     QTimer m_AnimationTimer;
     int score_;
+    int life_;
 
     std::vector<Ball*> balls_;
     std::vector<Brick*> bricks_;

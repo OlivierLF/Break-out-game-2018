@@ -25,12 +25,18 @@ float MainWindow::getWidth(){
 // Fonction de gestion d'interactions clavier
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
+    //std::cout << event->key()<<std::endl;
     switch(event->key())
     {
-    // Activation/Arret de l'animation
+    // Activation/Arret de l'animation de la balle
     case Qt::Key_Space:
     {
         ui->glWidget->changeBallMovement();
+        break;
+    }
+    case 16777220:
+    {
+        ui->glWidget->restart();
         break;
     }
     case 16777234: //Flèche gauche
