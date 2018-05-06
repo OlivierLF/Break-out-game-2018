@@ -29,7 +29,7 @@ void Wall::paint(float m_TimeElapsed){
     //mur sur les côtés
     if(lat_){
         WALL_WIDTH=10.0;
-        WALL_HEIGHT=50.0;
+        WALL_HEIGHT=24.0;
     }
 
     glBegin(GL_QUADS);

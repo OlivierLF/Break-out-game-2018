@@ -19,9 +19,6 @@ Ball::Ball(float x, float y, float rad, float r, float g, float b)
     blue_=b;
     green_=g;
 
-    //Direction initiale de la balle
-    direction_[0]=0.4;
-    direction_[1]=0.4;
 
     //Ball immobile au départ
     moveTest_=false;
@@ -47,11 +44,11 @@ void Ball::paint(float m_TimeElapsed){
         //Si la balle doit bouger
         if  (moveTest_){
             //Déplacement de la balle
-            glTranslatef(x_+direction_[0]*0.2f,y_+direction_[1]*0.2f,0);
+            glTranslatef(x_+direction_[0]*0.1f,y_+direction_[1]*0.1f,0);
 
             //Mise a jour des coordonnees de la balle
-            x_=x_+direction_[0]*0.2f;
-            y_=y_+direction_[1]*0.2f;
+            x_=x_+direction_[0]*0.1f;
+            y_=y_+direction_[1]*0.1f;
         }
         //Si la balle ne doit pas bouger, on l'affiche juste
         else{
