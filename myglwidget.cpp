@@ -13,6 +13,7 @@ const unsigned int WIN_WIDTH  = 1200;
 const unsigned int WIN_HEIGHT = 800;
 
 bool oneBallTest = true;
+bool justWonTest= false;
 
 // Constructeur
 MyGLWidget::MyGLWidget(QWidget * parent) : QGLWidget(parent)
@@ -97,7 +98,10 @@ void MyGLWidget::paintGL()
     for (Object* obj : scene_){
         if (obj->getType()==0){ //si l'objet est une balle
             if (!obj->getBallMovementTest()){
-                renderText(8.8,-12.0,0,"Appuyer sur Espace pour démarrer");
+                renderText(12,-14.0,0,"Appuyer sur Espace pour démarrer");
+            }
+            if (justWonTest && !obj->getBallMovementTest()){
+                renderText(14,-12.0,0,"Vous avez gagné !");
             }
             std::vector<Object*>::iterator it1;
             if(!obj->getBallMovementTest()){ //Fait en sorte d'avoir la balle collée au palet avant de la lancer
@@ -150,6 +154,7 @@ void MyGLWidget::paintGL()
                         obj->changeDirectY();
                         scene_.erase(it);
                         score_+=1;
+                        winTest();
                     }
                     // la balle tape au dessus de la brique
                     if (obj->getY()>=(*it)->getY()+0.5 && obj->getY()<=(*it)->getY()+1.5
@@ -157,6 +162,7 @@ void MyGLWidget::paintGL()
                         obj->changeDirectY();
                         scene_.erase(it);
                         score_+=1;
+                        winTest();
                     }
                     //la balle tape sur le côté gauche de la brique
                     if (obj->getY()>=(*it)->getY()-0.5 && obj->getY()<=(*it)->getY()+1.5
@@ -164,6 +170,7 @@ void MyGLWidget::paintGL()
                         obj->changeDirectX();
                         scene_.erase(it);
                         score_+=1;
+                        winTest();
                     }
                     //la balle tape sur le côté droit de la brique
                     if (obj->getY()>=(*it)->getY()-0.5 && obj->getY()<=(*it)->getY()+1.5
@@ -171,6 +178,7 @@ void MyGLWidget::paintGL()
                         obj->changeDirectX();
                         scene_.erase(it);
                         score_+=1;
+                        winTest();
                     }
                 }
                 if ((*it)->getType()==2){ //collision avec le palet
@@ -278,5 +286,13 @@ void MyGLWidget::restart(){
 void MyGLWidget::cleanScene(){
     while (!scene_.empty()){
         scene_.pop_back();
+    }
+}
+
+
+void MyGLWidget::winTest(){
+    if (score_==50){
+        restart();
+        justWonTest= true;
     }
 }

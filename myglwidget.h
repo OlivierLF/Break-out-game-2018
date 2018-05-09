@@ -37,6 +37,8 @@ public:
     void restart();
     //Nettoie la scene de tous ses éléments
     void cleanScene();
+    //Test pour savoir si le joueur a gagné.
+    void winTest();
 
 
 protected:
