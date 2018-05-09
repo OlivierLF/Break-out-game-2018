@@ -23,7 +23,7 @@ Wall::~Wall(){
 void Wall::paint(float m_TimeElapsed){
 
     //mur du dessus ou dessous
-    float WALL_WIDTH=61.0;
+    float WALL_WIDTH=53.8;
     float WALL_HEIGHT=10.0;
 
     //mur sur les côtés

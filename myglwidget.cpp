@@ -10,7 +10,7 @@
 
 // Declarations des constantes
 const unsigned int WIN_WIDTH  = 1200;
-const unsigned int WIN_HEIGHT = 700;
+const unsigned int WIN_HEIGHT = 800;
 
 bool oneBallTest = true;
 
@@ -74,7 +74,7 @@ void MyGLWidget::resizeGL(int width, int height)
     glLoadIdentity();
 
     if(width != 0)
-        glOrtho(-11,52,-35,11,-100,100);
+        glOrtho(-11,44.8,-35,11,-100,100);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -97,7 +97,7 @@ void MyGLWidget::paintGL()
     for (Object* obj : scene_){
         if (obj->getType()==0){ //si l'objet est une balle
             if (!obj->getBallMovementTest()){
-                renderText(16,-12.0,0,"Appuyer sur Espace pour démarrer");
+                renderText(8.8,-12.0,0,"Appuyer sur Espace pour démarrer");
             }
             std::vector<Object*>::iterator it1;
             if(!obj->getBallMovementTest()){ //Fait en sorte d'avoir la balle collée au palet avant de la lancer
@@ -122,13 +122,20 @@ void MyGLWidget::paintGL()
             }
             if (obj->getY()<-23.5){ //correspond à la balle qui tombe sur le mur inférieur
                 std::vector<Object*>::iterator ite;
-                for (ite=scene_.begin();ite!=scene_.end();++ite){
+                bool endTest=false;
+                ite=scene_.begin();
+                while (ite!=scene_.end() && !endTest){
                     if ((*ite)->getType()== 2){
                         obj->setX((*ite)->getX()+2.5);
                         obj->setY((*ite)->getY()+1.5);
                         obj->ballMovement();
                         life_-=1;
+                        if (life_==-1){ //redemarre le jeu si on a perdu nos 3 chances
+                            restart();
+                            endTest=true;
+                        }
                     }
+                    ++ite;
                 }
 
             }
@@ -181,7 +188,7 @@ void MyGLWidget::paintGL()
         QString scoreText = QString::number(score_);
         renderText(1,-21,0,"Score : "+scoreText);
         QString lifeText = QString::number(life_);
-        renderText(37,-21,0,"Vie : "+lifeText);
+        renderText(29.8,-21,0,"Vie : "+lifeText);
         renderText(1,-23, 0,"Entrée = Nouvelle partie");
         obj->paint(m_TimeElapsed);
     }
@@ -236,7 +243,7 @@ void MyGLWidget::init(){
     Wall* top = new Wall(-10.0,0.0,false);
     Wall* bot = new Wall(-10.0,-34.0,false);
     Wall* left = new Wall(-10.0,-24.0,true);
-    Wall* right = new Wall(41.0,-24.0,true);
+    Wall* right = new Wall(33.8,-24.0,true);
 
     //Ajout des murs aux éléments de la scène
     scene_.push_back(top);
@@ -245,14 +252,14 @@ void MyGLWidget::init(){
     scene_.push_back(right);
 
     //Ajout des briques dans la scène
-    int x=1;
-    while (x<=37){
-        int y=-2;
+    float x=1;
+    while (x<=32){
+        float y=-2;
         while (y>=-10){
             scene_.push_back(new Brick(x,y));
             y=y-2;
         }
-        x=x+4;
+        x=x+3.2;
     }
 
     //Déclaration et ajout du palet à la scène
@@ -265,11 +272,7 @@ void MyGLWidget::init(){
 
 void MyGLWidget::restart(){
     cleanScene();
-    score_=0;
-    life_=3;
-    std::cout<<"size "<<scene_.size()<<std::endl;
     init();
-    std::cout<<"size "<<scene_.size()<<std::endl;
 }
 
 void MyGLWidget::cleanScene(){
