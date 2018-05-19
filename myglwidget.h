@@ -22,7 +22,7 @@ class MyGLWidget : public QGLWidget
 public:
     // Constructeur
     MyGLWidget(QWidget * parent = nullptr);
-
+    //récupère la scène
     std::vector<Object*> getScene(){return scene_;}
 
     //Mouvement du palet vers la gauche
@@ -56,12 +56,12 @@ private:
     // Timer d'animation
     float m_TimeElapsed { 0.0f };
     QTimer m_AnimationTimer;
+
+    //paramètre de la partie
     int score_;
     int life_;
 
-    std::vector<Ball*> balls_;
-    std::vector<Brick*> bricks_;
-    std::vector <Wall*> walls_;
+    //vecteur qui contient les éléments de la scène
     std::vector<Object*> scene_;
 
 };

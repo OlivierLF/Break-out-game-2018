@@ -121,7 +121,7 @@ void MyGLWidget::paintGL()
             if (obj->getX()<0.5){ //mur de gauche
                 obj->changeDirectX();
             }
-            if (obj->getX()>40.5){ //mur de droite
+            if (obj->getX()>33.3){ //mur de droite
                 obj->changeDirectX();
             }
             if (obj->getY()<-23.5){ //correspond à la balle qui tombe sur le mur inférieur
@@ -226,7 +226,7 @@ void MyGLWidget::moveRight(){
     for (it=scene_.begin();it!=scene_.end();++it){
         if ((*it)->getType()==2){ //Si l'objet est un palet
             //Condition pour ne pas faire sortir le palet de la partie jouable
-            if ((*it)->getX() <36){ //largeur (41) - taille du palet (5) = 35
+            if ((*it)->getX() <29){ //largeur (33.8) - taille du palet (5) = 28.8
                 (*it)->setX((*it)->getX()+1.1);
             }
         }

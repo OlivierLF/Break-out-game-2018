@@ -15,13 +15,17 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    //getters
     float getHeight();
     float getWidth();
+    // Fonction de gestion d'interactions clavier
     void keyPressEvent(QKeyEvent * event);
 
 
 private:
     MyGLWidget* glWidget;
+    //permet la mise en forme définie par
     Ui::MainWindow *ui;
 
 };
