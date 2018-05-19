@@ -35,11 +35,10 @@ private:
     int templateWidth;
     int templateHeight;
 
-    Mat frame1,frame2,frameRect1,frameRect2;
+    Mat frame1,*frame2,frameRect1,*frameRect2;
 
 
-
-    cv::VideoCapture capwebcam;
+    cv::VideoCapture *capwebcam;
     cv::Mat matOriginal;
     cv::Mat matProcess;
 
