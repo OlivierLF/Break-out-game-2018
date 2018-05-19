@@ -23,6 +23,8 @@ public:
     void keyPressEvent(QKeyEvent * event);
 
 
+
+
 private:
     MyGLWidget* glWidget;
     //permet la mise en forme définie par

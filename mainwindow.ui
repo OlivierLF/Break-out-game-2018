@@ -16,10 +16,43 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="MyGLWidget" name="glWidget" native="true"/>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QPushButton" name="btnPauseOrResume">
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblProcess">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblOriginal">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
-     <widget class="QWidget" name="widget" native="true"/>
+     <widget class="QWidget" name="widget" native="true">
+      <widget class="MyGLWidget" name="glWidget" native="true">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>0</y>
+         <width>642</width>
+         <height>699</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -29,7 +62,7 @@
      <x>0</x>
      <y>0</y>
      <width>1300</width>
-     <height>25</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>

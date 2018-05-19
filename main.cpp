@@ -2,6 +2,8 @@
 #include <ctime>
 #include "myglwidget.h"
 #include "mainwindow.h"
+#include "dialog.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +17,8 @@ int main(int argc, char *argv[])
     MainWindow myWindow;
     myWindow.show();
 
+    Dialog w;
+    w.show();
 
     // Execution de l'application QT
     return app.exec();
