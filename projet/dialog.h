@@ -4,8 +4,9 @@
 #include <QDialog>
 #include <opencv2\opencv.hpp>
 #include <opencv2\video\tracking.hpp>
-#include <opencv2\imgproc.hpp>
-#include <C:\opencv-2.4.13.5\opencv-2.4.13.5\build\install\include\opencv2\highgui\highgui.hpp>
+
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 
 #include <cstdio>
@@ -14,16 +15,13 @@ using namespace cv;
 using namespace std;
 
 
-namespace Ui {
-class Dialog;
-}
 
 class Dialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Dialog(QWidget *parent = 0);
+    explicit Dialog();
     ~Dialog();
 
 
@@ -41,7 +39,7 @@ private:
 
 
 
-    Ui::Dialog *ui;
+
 
     cv::VideoCapture capwebcam;
     cv::Mat matOriginal;
@@ -57,12 +55,7 @@ private:
     QTimer* tmrTimer;
 
  public slots:
-    void processFrameAndUpdateGUI();
-
-
-
- private slots:
-    void on_btnPauseOrResume_clicked();
+    Mat processFrameAndUpdateGUI();
 
 
 

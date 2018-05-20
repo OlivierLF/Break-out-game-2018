@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "myglwidget.h"
-
+#include "dialog.h"
 namespace Ui {
 class MainWindow;
 }
@@ -24,12 +24,16 @@ public:
 
 signals:
     void on_Dialog_clicked(); //Emit quand on clique sur le bouton "webcam"
+private slots:
+    void camera();
 
 
 private:
     MyGLWidget* glWidget;
     //permet la mise en forme définie par
     Ui::MainWindow *ui;
+    Dialog *dialog;
+    QTimer *timer;
 
 };
 

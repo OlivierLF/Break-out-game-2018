@@ -63,6 +63,7 @@ private:
 
     //vecteur qui contient les éléments de la scène
     std::vector<Object*> scene_;
+    //std::vector<puck*> move_puck;
 
 };
 

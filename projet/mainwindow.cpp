@@ -7,6 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    dialog = new Dialog();
+    timer = new QTimer();
+    timer->start(10);
+    connect (timer,SIGNAL(timeout()),this,SLOT(camera()));
+
     connect(this, SIGNAL(on_Dialog_clicked()), ui->glWidget, SLOT(interactionDialog()));
 }
 
@@ -68,4 +73,12 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
 
     // Acceptation de l'evenement et mise a jour de la scene
 
+}
+void MainWindow::camera(){
+    Mat frameToUpdate;
+    QImage image ;
+    frameToUpdate=dialog->processFrameAndUpdateGUI();
+    image = QImage((const unsigned char*) (frameToUpdate.data), frameToUpdate.cols, frameToUpdate.rows,frameToUpdate.step, QImage::Format_RGB888);
+    QImage size = image.scaled(ui->camera->width(),ui->camera->height(),Qt::KeepAspectRatio);
+    ui->camera->setPixmap(QPixmap::fromImage(size));
 }

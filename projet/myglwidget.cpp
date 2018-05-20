@@ -200,6 +200,14 @@ void MyGLWidget::paintGL()
         renderText(1,-23, 0,"Entrée = Nouvelle partie");
         obj->paint(m_TimeElapsed);
     }
+
+    //void MyGLWidget::moveCam(){
+     //   if((puck[0]->getX()+puck[0]->largeur+puck_depl caméra))
+
+    //}
+
+
+
 }
 
 // Fonction de gestion d'interactions clavier
@@ -295,4 +303,6 @@ void MyGLWidget::winTest(){
         restart();
         justWonTest= true;
     }
+
+
 }

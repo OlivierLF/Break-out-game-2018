@@ -1,5 +1,5 @@
 #include "dialog.h"
-#include "ui_dialog.h"
+
 #include <QTime>
 #include <QtCore>
 #include "opencv2\video\tracking.hpp"
@@ -14,18 +14,14 @@ using namespace std;
 
 
 
-Dialog::Dialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Dialog)
-{
-    ui->setupUi(this);
+Dialog::Dialog() {
+
 
 
     capwebcam.open(0);
 
 
     tmrTimer = new QTimer(this);
-    connect(tmrTimer,SIGNAL(timeout()),this,SLOT(processFrameAndUpdateGUI()));
     tmrTimer->start(20);
     frameWidth=320;
     frameHeight=240;
@@ -40,9 +36,8 @@ Dialog::Dialog(QWidget *parent) :
 
 Dialog::~Dialog()
 {
-    delete ui;
 }
-void Dialog::processFrameAndUpdateGUI(){
+Mat Dialog::processFrameAndUpdateGUI(){
     Rect workingRect((frameWidth-subImageWidth)/2,frameHeight/2+(frameHeight/2-subImageHeight)/2,subImageWidth,subImageHeight);
     Rect templateRect((workingRect.width-templateWidth)/2,(workingRect.height-templateHeight)/2,templateWidth,templateHeight);
     Point workingCenter(workingRect.x+subImageWidth/2,workingRect.y+subImageHeight/2);
@@ -79,10 +74,12 @@ void Dialog::processFrameAndUpdateGUI(){
         minMaxLoc( resultImage, &minVal, &maxVal, &minLoc, &maxLoc);
         // Compute the translation vector between the origin and the matching rect
         Point vect(maxLoc.x-templateRect.x,maxLoc.y-templateRect.y);
-
+        //x*move=vectx;// permet d'avoir le déplacement du palet selon l'axe des abscisses
+        //y*move=vety; // permet d'avoir le déplacement du palet selon l'axe des ordonnées (non utilisé ici)
         // Draw green rectangle and the translation vector
         rectangle(frame2,workingRect,Scalar( 0, 255, 0),2);
         Point p(workingCenter.x+vect.x,workingCenter.y+vect.y);
+
         arrowedLine(frame2,workingCenter,p,Scalar(255,255,255),2);
         if(vect.x>1){
             qDebug()<<"droite";
@@ -95,24 +92,11 @@ void Dialog::processFrameAndUpdateGUI(){
         // Display frame2
         //imshow("WebCam2", frame2);
         QImage qimgOriginal((uchar*)frame2.data,frame2.cols,frame2.rows,frame2.step,QImage::Format_RGB888);
-        ui->lblOriginal->setPixmap(QPixmap::fromImage(qimgOriginal));
+
         // Swap matrixes
         swap(frameRect1,frameRect2);
         cvtColor(frame2, frame2, CV_BGR2RGB);
+    return frame2;
 
-
-
-}
-void Dialog::on_btnPauseOrResume_clicked()
-{
-    if(tmrTimer->isActive() == true){
-        tmrTimer->stop();
-        ui->btnPauseOrResume->setText("resume");
-
-    }else{
-        tmrTimer->start(20);
-        ui->btnPauseOrResume->setText("pause");
-
-    }
 
 }
