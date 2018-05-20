@@ -80,4 +80,5 @@ RESOURCES += \
     textures.qrc
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    dialog.ui

@@ -18,23 +18,9 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QPushButton" name="btnPauseOrResume">
+       <widget class="QPushButton" name="Dialog">
         <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="lblProcess">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="lblOriginal">
-        <property name="text">
-         <string>TextLabel</string>
+         <string>Dialog</string>
         </property>
        </widget>
       </item>
@@ -74,6 +60,11 @@
    <extends>QWidget</extends>
    <header>myglwidget.h</header>
    <container>1</container>
+   <slots>
+    <slot>setXRotation(int)</slot>
+    <slot>setZRotation(int)</slot>
+    <slot>setYRotation(int)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -22,7 +22,8 @@ public:
     // Fonction de gestion d'interactions clavier
     void keyPressEvent(QKeyEvent * event);
 
-
+signals:
+    void on_Dialog_clicked(); //Emit quand on clique sur le bouton "webcam"
 
 
 private:

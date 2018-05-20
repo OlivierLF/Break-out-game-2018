@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(this, SIGNAL(on_Dialog_clicked()), ui->glWidget, SLOT(interactionDialog()));
 }
 
 MainWindow::~MainWindow()
