@@ -9,8 +9,8 @@
 #include <GL/glu.h>
 
 // Declarations des constantes
-const unsigned int WIN_WIDTH  = 1000;
-const unsigned int WIN_HEIGHT = 800;
+const unsigned int WIN_WIDTH  = 835;
+const unsigned int WIN_HEIGHT = 600;
 
 bool oneBallTest = true;
 bool justWonTest= false;
@@ -75,7 +75,7 @@ void MyGLWidget::resizeGL(int width, int height)
     glLoadIdentity();
 
     if(width != 0)
-        glOrtho(-11,44.8,-35,11,-100,100);
+        glOrtho(-1,34.8,-25,1,-100,100);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();

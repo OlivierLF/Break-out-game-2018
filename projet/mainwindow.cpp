@@ -93,6 +93,11 @@ void MainWindow::camera(){
         ui->glWidget->puckMovement(2);
     }
 
+    else if (testMove==0){
+        std::cout<<"pas de mouvement"<<std::endl;
+        ui->glWidget->puckMovement(0);
+    }
+
 }
 
 void MainWindow::on_Pause_clicked()

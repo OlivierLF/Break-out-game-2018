@@ -29,8 +29,6 @@ Dialog::Dialog() {
     templateWidth=25;
     templateHeight=25;
 
-
-
 }
 
 Dialog::~Dialog()
@@ -89,6 +87,11 @@ Mat Dialog::processFrameAndUpdateGUI(){
             //le palet va a gauche lorsque move_=1
             move_=1;
             qDebug()<<"gauche";
+        }
+
+        if(vect.x<1 && vect.x>-1){
+            move_=0;
+            qDebug()<<"none";
         }
 
         // Display frame2
