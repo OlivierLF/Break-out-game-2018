@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer();
     timer->start(10);
     connect (timer,SIGNAL(timeout()),this,SLOT(camera()));
-    connect(timer, SIGNAL(on_Pause_clicked()),this, SLOT(on_Pause_clicked()));
 
 
 }
@@ -100,16 +99,3 @@ void MainWindow::camera(){
 
 }
 
-void MainWindow::on_Pause_clicked()
-{
-    if(timer->isActive() == true){
-        timer->stop();
-        ui->Pause->setText("relancer");
-
-    }else{
-        timer->start(20);
-        ui->Pause->setText("pause");
-
-    }
-
-}

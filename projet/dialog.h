@@ -39,9 +39,6 @@ private:
     Mat frame1,frame2,frameRect1,frameRect2;
 
 
-
-
-
     cv::VideoCapture capwebcam;
     cv::Mat matOriginal;
     cv::Mat matProcess;

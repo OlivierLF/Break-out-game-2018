@@ -26,7 +26,6 @@ public:
     virtual void ballMovement(){}
 
 
-
 };
 
 #endif // BRICK_H

@@ -201,15 +201,12 @@ void MyGLWidget::paintGL()
         obj->paint(m_TimeElapsed);
     }
 
-
-
 }
 
 // Fonction de gestion d'interactions clavier
 void MyGLWidget::keyPressEvent(QKeyEvent * event)
 {
 }
-
 
 
 void MyGLWidget::puckMovement(int dir){
@@ -240,7 +237,6 @@ void MyGLWidget::puckMovement(int dir){
             }
         }
     }
-
 }
 
 void MyGLWidget::changeBallMovement(){

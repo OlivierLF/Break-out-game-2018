@@ -26,7 +26,6 @@ public:
     //void on_Dialog_clicked(); //Emit quand on clique sur le bouton "webcam"
 private slots:
     void camera();
-    void on_Pause_clicked();
 
 
 private:
