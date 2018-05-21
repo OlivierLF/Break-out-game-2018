@@ -26,9 +26,7 @@ public:
     std::vector<Object*> getScene(){return scene_;}
 
     //Mouvement du palet vers la gauche
-    void moveLeft();
-    //Mouvement du palet vers la droite
-    void moveRight();
+    void puckMovement(int dir);
     //Activer mouvement ou non de la balle
     void changeBallMovement();
     //Initialise la scène

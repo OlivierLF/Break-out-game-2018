@@ -14,7 +14,8 @@ using namespace std;
 
 
 Dialog::Dialog() {
-
+    //on initialise la palet sans mouvement
+    move_=0;
 
     capwebcam.open(0);
 
@@ -81,10 +82,12 @@ Mat Dialog::processFrameAndUpdateGUI(){
         arrowedLine(frame2,workingCenter,p,Scalar(255,255,255),2);
         if(vect.x>1){
             qDebug()<<"droite";
-            moveRight_=true;
+            //le palet va a droite lorsque move_=2
+            move_=2;
         }
         if(vect.x<-1){
-            moveRight_=false;
+            //le palet va a gauche lorsque move_=1
+            move_=1;
             qDebug()<<"gauche";
         }
 

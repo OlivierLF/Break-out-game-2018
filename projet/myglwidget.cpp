@@ -211,29 +211,36 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
 }
 
 
-void MyGLWidget::moveLeft(){
-    std::vector<Object*>::iterator it;
-    for (it=scene_.begin();it!=scene_.end();++it){
-        if ((*it)->getType()==2){ //Si l'objet est un palet
-            //Condition pour ne pas faire sortir le palet de la partie jouable
-            if ((*it)->getX() > 0){
-                (*it)->setX((*it)->getX()-1.1);
-            }
 
-        }
+void MyGLWidget::puckMovement(int dir){
+    //le palet ne doit pas bouger
+    if (dir==0){
+        return;
     }
-}
+    else if (dir==1){ //si le palet doit aller à gauche
+        std::vector<Object*>::iterator it;
+        for (it=scene_.begin();it!=scene_.end();++it){
+            if ((*it)->getType()==2){ //Si l'objet est un palet
+                //Condition pour ne pas faire sortir le palet de la partie jouable
+                if ((*it)->getX() > 0){
+                    (*it)->setX((*it)->getX()-1.1);
+                }
 
-void MyGLWidget::moveRight(){
-    std::vector<Object*>::iterator it;
-    for (it=scene_.begin();it!=scene_.end();++it){
-        if ((*it)->getType()==2){ //Si l'objet est un palet
-            //Condition pour ne pas faire sortir le palet de la partie jouable
-            if ((*it)->getX() <29){ //largeur (33.8) - taille du palet (5) = 28.8
-                (*it)->setX((*it)->getX()+1.1);
             }
         }
     }
+    else if(dir==2){ //Si le palet doit aller à droite
+        std::vector<Object*>::iterator it;
+        for (it=scene_.begin();it!=scene_.end();++it){
+            if ((*it)->getType()==2){ //Si l'objet est un palet
+                //Condition pour ne pas faire sortir le palet de la partie jouable
+                if ((*it)->getX() <29){ //largeur (33.8) - taille du palet (5) = 28.8
+                    (*it)->setX((*it)->getX()+1.1);
+                }
+            }
+        }
+    }
+
 }
 
 void MyGLWidget::changeBallMovement(){

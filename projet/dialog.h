@@ -23,8 +23,8 @@ class Dialog : public QDialog
 public:
     explicit Dialog();
     ~Dialog();
-    bool moveRight_;
-    bool getMoveRight(){return moveRight_;}
+    int move_;
+    int getMove(){return move_;}
 
 
 private:

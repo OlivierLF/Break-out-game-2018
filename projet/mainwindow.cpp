@@ -48,19 +48,19 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     }
     case 16777234: //Flèche gauche
     {
-        ui->glWidget->moveLeft();
+        //ui->glWidget->moveLeft();
         break;
     }
     case 16777236: //Flèche droite
     {
-        ui->glWidget->moveRight();
+        //ui->glWidget->moveRight();
         break;
     }
 
         // Sortie de l'application
     case Qt::Key_Escape:
     {
-        exit(0);
+        break;
     }
 
         // Cas par defaut
@@ -83,14 +83,14 @@ void MainWindow::camera(){
     QImage size = image.scaled(ui->camera->width(),ui->camera->height(),Qt::KeepAspectRatio);
     ui->camera->setPixmap(QPixmap::fromImage(size));
 
-    bool test = dialog->getMoveRight();
-    if (test){
-        std::cout<<"mouvement a droite"<<std::endl;
-        ui->glWidget->moveRight();
-    }
-    else{
+    int testMove = dialog->getMove();
+    if (testMove==1){
         std::cout<<"mouvement a gauche"<<std::endl;
-        ui->glWidget->moveLeft();
+        ui->glWidget->puckMovement(1);
+    }
+    else if (testMove==2){
+        std::cout<<"mouvement a droite"<<std::endl;
+        ui->glWidget->puckMovement(2);
     }
 
 }
