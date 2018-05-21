@@ -18,16 +18,16 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QPushButton" name="Pause">
+       <widget class="QLabel" name="camera">
         <property name="text">
-         <string>Pause</string>
+         <string>TextLabel</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="camera">
+       <widget class="QPushButton" name="Pause">
         <property name="text">
-         <string>TextLabel</string>
+         <string>Pause</string>
         </property>
        </widget>
       </item>

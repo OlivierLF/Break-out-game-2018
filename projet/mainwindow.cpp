@@ -13,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect (timer,SIGNAL(timeout()),this,SLOT(camera()));
     connect(timer, SIGNAL(on_Pause_clicked()),this, SLOT(on_Pause_clicked()));
 
-    connect(this, SIGNAL(on_Dialog_clicked()), ui->glWidget, SLOT(interactionDialog()));
 
 }
 
