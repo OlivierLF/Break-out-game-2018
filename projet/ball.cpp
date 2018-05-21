@@ -44,11 +44,11 @@ void Ball::paint(float m_TimeElapsed){
         //Si la balle doit bouger
         if  (moveTest_){
             //Déplacement de la balle
-            glTranslatef(x_+direction_[0]*0.1f,y_+direction_[1]*0.1f,0);
+            glTranslatef(x_+direction_[0]*0.3f,y_+direction_[1]*0.3f,0);
 
             //Mise a jour des coordonnees de la balle
-            x_=x_+direction_[0]*0.1f;
-            y_=y_+direction_[1]*0.1f;
+            x_=x_+direction_[0]*0.3f;
+            y_=y_+direction_[1]*0.3f;
         }
         //Si la balle ne doit pas bouger, on l'affiche juste
         else{
