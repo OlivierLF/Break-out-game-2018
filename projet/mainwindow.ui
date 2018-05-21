@@ -18,6 +18,13 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
+       <widget class="QPushButton" name="Pause">
+        <property name="text">
+         <string>Pause</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="camera">
         <property name="text">
          <string>TextLabel</string>
@@ -48,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>1300</width>
-     <height>25</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>

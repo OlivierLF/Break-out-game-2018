@@ -59,6 +59,7 @@ private:
     Mat processFrameAndUpdateGUI();
 
 
+
 };
 
 #endif // DIALOG_H

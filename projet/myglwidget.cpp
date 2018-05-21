@@ -9,7 +9,7 @@
 #include <GL/glu.h>
 
 // Declarations des constantes
-const unsigned int WIN_WIDTH  = 1200;
+const unsigned int WIN_WIDTH  = 1000;
 const unsigned int WIN_HEIGHT = 800;
 
 bool oneBallTest = true;
@@ -200,11 +200,6 @@ void MyGLWidget::paintGL()
         renderText(1,-23, 0,"Entrée = Nouvelle partie");
         obj->paint(m_TimeElapsed);
     }
-
-    //void MyGLWidget::moveCam(){
-     //   if((puck[0]->getX()+puck[0]->largeur+puck_depl caméra))
-
-    //}
 
 
 

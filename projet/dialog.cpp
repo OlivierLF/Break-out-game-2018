@@ -1,5 +1,5 @@
 #include "dialog.h"
-
+#include "ui_dialog.h"
 #include <QTime>
 #include <QtCore>
 #include "opencv2\video\tracking.hpp"
@@ -11,7 +11,6 @@
 #include <iostream>
 using namespace cv;
 using namespace std;
-
 
 
 Dialog::Dialog() {
@@ -100,4 +99,5 @@ Mat Dialog::processFrameAndUpdateGUI(){
 
 
 }
+
 

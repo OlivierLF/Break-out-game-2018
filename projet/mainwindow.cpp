@@ -11,8 +11,10 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer();
     timer->start(10);
     connect (timer,SIGNAL(timeout()),this,SLOT(camera()));
+    connect(timer, SIGNAL(on_Pause_clicked()),this, SLOT(on_Pause_clicked()));
 
     connect(this, SIGNAL(on_Dialog_clicked()), ui->glWidget, SLOT(interactionDialog()));
+
 }
 
 MainWindow::~MainWindow()
@@ -90,6 +92,20 @@ void MainWindow::camera(){
     else{
         std::cout<<"mouvement a gauche"<<std::endl;
         ui->glWidget->moveLeft();
+    }
+
+}
+
+void MainWindow::on_Pause_clicked()
+{
+    if(timer->isActive() == true){
+        timer->stop();
+        ui->Pause->setText("relancer");
+
+    }else{
+        timer->start(20);
+        ui->Pause->setText("pause");
+
     }
 
 }
