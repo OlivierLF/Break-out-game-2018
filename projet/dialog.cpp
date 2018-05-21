@@ -17,7 +17,6 @@ using namespace std;
 Dialog::Dialog() {
 
 
-
     capwebcam.open(0);
 
 
@@ -83,9 +82,10 @@ Mat Dialog::processFrameAndUpdateGUI(){
         arrowedLine(frame2,workingCenter,p,Scalar(255,255,255),2);
         if(vect.x>1){
             qDebug()<<"droite";
+            moveRight_=true;
         }
         if(vect.x<-1){
-
+            moveRight_=false;
             qDebug()<<"gauche";
         }
 
@@ -100,3 +100,4 @@ Mat Dialog::processFrameAndUpdateGUI(){
 
 
 }
+

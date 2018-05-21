@@ -23,7 +23,8 @@ class Dialog : public QDialog
 public:
     explicit Dialog();
     ~Dialog();
-
+    bool moveRight_;
+    bool getMoveRight(){return moveRight_;}
 
 
 private:
@@ -56,7 +57,6 @@ private:
 
  public slots:
     Mat processFrameAndUpdateGUI();
-
 
 
 };

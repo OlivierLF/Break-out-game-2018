@@ -81,4 +81,15 @@ void MainWindow::camera(){
     image = QImage((const unsigned char*) (frameToUpdate.data), frameToUpdate.cols, frameToUpdate.rows,frameToUpdate.step, QImage::Format_RGB888);
     QImage size = image.scaled(ui->camera->width(),ui->camera->height(),Qt::KeepAspectRatio);
     ui->camera->setPixmap(QPixmap::fromImage(size));
+
+    bool test = dialog->getMoveRight();
+    if (test){
+        std::cout<<"mouvement a droite"<<std::endl;
+        ui->glWidget->moveRight();
+    }
+    else{
+        std::cout<<"mouvement a gauche"<<std::endl;
+        ui->glWidget->moveLeft();
+    }
+
 }

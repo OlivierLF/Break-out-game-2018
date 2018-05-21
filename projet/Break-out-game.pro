@@ -18,9 +18,9 @@ TEMPLATE = app
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 INCLUDEPATH +=C:\build\opencv2\include
           # $$(OPENCV_DIR)\..\..\include\
-INCLUDEPATH+=C:/opencv-2.4.13.5/opencv-2.4.13.5/build/install/include
+INCLUDEPATH+=D:\opencv-2.4.13.5\build\install/include
 
-LIBS += -LC:\opencv-2.4.13.5\opencv-2.4.13.5\build\install\x86\mingw\lib \
+LIBS += -LD:\opencv-2.4.13.5\build\install\x86\mingw\lib\
     -lopencv_core2413 \
     -lopencv_highgui2413 \
     -lopencv_imgproc2413 \
