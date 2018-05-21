@@ -36,7 +36,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     switch(event->key())
     {
     // Activation/Arret de l'animation de la balle
-    case Qt::Key_Space:
+    case Qt::Key_D:
     {
         ui->glWidget->changeBallMovement();
         break;

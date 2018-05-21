@@ -98,7 +98,7 @@ void MyGLWidget::paintGL()
     for (Object* obj : scene_){
         if (obj->getType()==0){ //si l'objet est une balle
             if (!obj->getBallMovementTest()){
-                renderText(12,-14.0,0,"Appuyer sur Espace pour démarrer");
+                renderText(12,-14.0,0,"Appuyer sur -d pour démarrer");
             }
             if (justWonTest && !obj->getBallMovementTest()){
                 renderText(14,-12.0,0,"Vous avez gagné !");
