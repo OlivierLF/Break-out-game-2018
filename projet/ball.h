@@ -9,7 +9,7 @@ class Ball : public Object
 public:
     Ball(float x, float y, float rad, float r, float g, float b);
     virtual ~Ball();
-    //affihce la balle
+    //affiche la balle
     virtual void paint(float m_TimeElapsed);
     //getters & setters
     virtual int getType(){return type_;}

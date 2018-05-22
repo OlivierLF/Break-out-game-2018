@@ -27,6 +27,7 @@ Ball::Ball(float x, float y, float rad, float r, float g, float b)
     displayBall_=true;
 }
 
+// destructeur
 Ball::~Ball(){
     gluDeleteQuadric(quadrique_);
     delete this;

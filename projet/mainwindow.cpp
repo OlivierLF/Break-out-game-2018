@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    dialog = new Dialog();
+    interfacecam = new Interfacecam();
     timer = new QTimer();
     timer->start(10);
     connect (timer,SIGNAL(timeout()),this,SLOT(camera()));
@@ -77,12 +77,12 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
 void MainWindow::camera(){
     Mat frameToUpdate;
     QImage image ;
-    frameToUpdate=dialog->processFrameAndUpdateGUI();
+    frameToUpdate=interfacecam->framesInterface();
     image = QImage((const unsigned char*) (frameToUpdate.data), frameToUpdate.cols, frameToUpdate.rows,frameToUpdate.step, QImage::Format_RGB888);
     QImage size = image.scaled(ui->camera->width(),ui->camera->height(),Qt::KeepAspectRatio);
     ui->camera->setPixmap(QPixmap::fromImage(size));
 
-    int testMove = dialog->getMove();
+    int testMove = interfacecam->getMove();
     if (testMove==1){
         std::cout<<"mouvement a gauche"<<std::endl;
         ui->glWidget->puckMovement(1);

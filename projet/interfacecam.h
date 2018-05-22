@@ -1,5 +1,5 @@
-#ifndef DIALOG_H
-#define DIALOG_H
+#ifndef INTERFACECAM_H
+#define INTERFACECAM_H
 
 #include <QDialog>
 #include <opencv2\opencv.hpp>
@@ -16,47 +16,46 @@ using namespace std;
 
 
 
-class Dialog : public QDialog
+class Interfacecam : public QDialog // classe affichant la caméra et la zone de captation de la main
 {
     Q_OBJECT
 
 public:
-    explicit Dialog();
-    ~Dialog();
+    explicit Interfacecam();
+    ~Interfacecam();
     int move_;
     int getMove(){return move_;}
 
 
 private:
-
+    // largeur de la frame
     int frameWidth;
+    // hateur de la frame
     int frameHeight;
     int subImageWidth;
     int subImageHeight;
     int templateWidth;
     int templateHeight;
-
+    // définition des matrices des différentes frames et rectangles
     Mat frame1,frame2,frameRect1,frameRect2;
 
-
-    cv::VideoCapture capwebcam;
+    // permet de capturer des données vidéo à partir de séquences ou images
+    cv::VideoCapture capture;
     cv::Mat matOriginal;
     cv::Mat matProcess;
 
-
+    // accéder aux données pixels
     QImage qimgOriginal;
     QImage qimgProcess;
 
     std::vector<cv::Vec3f>VecCircles;
     std::vector<cv::Vec3f>::iterator itrCircles;
-
+    //timer
     QTimer* tmrTimer;
 
  public slots:
-    Mat processFrameAndUpdateGUI();
-
-
+    Mat framesInterface();
 
 };
 
-#endif // DIALOG_H
+#endif // INTERFACECAM_H
