@@ -75,25 +75,27 @@ Mat Interfacecam::framesInterface(){
         minMaxLoc( image_de_resultat, &minVal, &maxVal, &minLoc, &maxLoc);
         // Réalise la translation du vecteur entre l'origine et le correspondant
         Point vect(maxLoc.x-templateRect.x,maxLoc.y-templateRect.y);
-        // Trace le rectangle vert (zone active à la caméra) et le vecteur de déplacement semlon le mouvement de la main
+        // Trace le rectangle vert (zone active à la caméra) et le vecteur de déplacement selon le mouvement de la main
         rectangle(frame2,workingRect,Scalar( 0, 255, 0),2);
         Point p(workingCenter.x+vect.x,workingCenter.y+vect.y);
         // récupère le mouvement afin d'afficher en sortie d'application la direction de la main
         arrowedLine(frame2,workingCenter,p,Scalar(255,255,255),2);
+
+
         if(vect.x>1){ // condition si le vecteur de déplacement est orienté vers la droite
-            qDebug()<<"droite";
+            qDebug()<<"droite"; // affiché en sortie de l'application
             //le palet va a droite lorsque move_=2
             move_=2; // le palet se déplace à droite
         }
         if(vect.x<-1){ // condition si le vecteur de déplacement est orienté vers la droite
             //le palet va a gauche lorsque move_=1
             move_=1; // le palet se déplace à gauche
-            qDebug()<<"gauche";
+            qDebug()<<"gauche"; // affiché en sortie de l'application
         }
 
         if(vect.x<1 && vect.x>-1){ // condition si le vecteur de déplacement est immobile
             move_=0; // le palet reste immobile
-            qDebug()<<"none";
+            qDebug()<<"none"; // affiché en sortie de l'application
         }
 
         // Affichage frame2

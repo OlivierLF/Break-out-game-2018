@@ -47,17 +47,6 @@ void MyGLWidget::initializeGL()
     // Activation du zbuffer
     glEnable(GL_DEPTH_TEST);
 
-    // Reglage de la lampe
-    //glEnable(GL_LIGHT0);
-    //Couleur de l'éclairage
-    //GLfloat lampe []={1.0,1.0,1.0,1.0};
-    //glLightfv(GL_LIGHT0,GL_AMBIENT_AND_DIFFUSE,lampe);
-    //Position de la lampe
-    //GLfloat position []={0.0,0.0,0.0,1.0};
-    //glLightfv(GL_LIGHT0,GL_POSITION,position);
-
-    // Activation de la lumiere
-    //glEnable(GL_LIGHTING);
 
     //Initialisation des la scène
     init();
@@ -98,7 +87,7 @@ void MyGLWidget::paintGL()
     for (Object* obj : scene_){
         if (obj->getType()==0){ //si l'objet est une balle
             if (!obj->getBallMovementTest()){
-                renderText(12,-14.0,0,"Appuyer sur -d pour démarrer");
+                renderText(12,-14.0,0,"Appuyer sur la touche 'd' pour démarrer");
             }
             if (justWonTest && !obj->getBallMovementTest()){
                 renderText(14,-12.0,0,"Vous avez gagné !");
@@ -208,7 +197,6 @@ void MyGLWidget::keyPressEvent(QKeyEvent * event)
 {
 }
 
-
 void MyGLWidget::puckMovement(int dir){
     //le palet ne doit pas bouger
     if (dir==0){
@@ -284,18 +272,20 @@ void MyGLWidget::init(){
     scene_.push_back(new Ball(21.5, -20.5, 0.5,255,255,0));
 }
 
+// cas où le jeu redémarre
 void MyGLWidget::restart(){
     cleanScene();
     init();
 }
 
+// nettoyage de la scene
 void MyGLWidget::cleanScene(){
     while (!scene_.empty()){
         scene_.pop_back();
     }
 }
 
-
+// cas où l'on gagne
 void MyGLWidget::winTest(){
     if (score_==50){
         restart();

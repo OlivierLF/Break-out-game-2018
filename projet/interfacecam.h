@@ -48,7 +48,7 @@ private:
     QImage qimgOriginal;
     QImage qimgProcess;
 
-    std::vector<cv::Vec3f>VecCircles;
+    std::vector<cv::Vec3f>VectorCircles;
     std::vector<cv::Vec3f>::iterator itrCircles;
     //timer
     QTimer* tmrTimer;

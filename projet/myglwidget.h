@@ -14,7 +14,7 @@
 
 
 
-// Classe dediee a l'affichage d'une scene OpenGL
+// Classe dédiee a l'affichage d'une scene OpenGL
 class MyGLWidget : public QGLWidget
 {
     Q_OBJECT

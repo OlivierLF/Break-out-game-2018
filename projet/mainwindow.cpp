@@ -47,12 +47,12 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     }
     case 16777234: //Flèche gauche
     {
-        //ui->glWidget->moveLeft();
+        ui->glWidget->puckMovement(1);
         break;
     }
     case 16777236: //Flèche droite
     {
-        //ui->glWidget->moveRight();
+        ui->glWidget->puckMovement(2);
         break;
     }
 
