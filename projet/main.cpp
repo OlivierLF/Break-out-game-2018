@@ -17,8 +17,6 @@ int main(int argc, char *argv[])
     MainWindow myWindow;
     myWindow.show();
 
-    Interfacecam w;
-    w.show();
 
     // Execution de l'application QT
     return app.exec();
