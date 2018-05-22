@@ -38,9 +38,9 @@ Interfacecam::~Interfacecam()
 
 // type matrice dans lequel sont implémentés les éléments permettant l'affichage de la caméra
 Mat Interfacecam::framesInterface(){
-    Rect workingRect((frameWidth-subImageWidth)/2,frameHeight/2+(frameHeight/2-subImageHeight)/2,subImageWidth,subImageHeight);
-    Rect templateRect((workingRect.width-templateWidth)/2,(workingRect.height-templateHeight)/2,templateWidth,templateHeight);
-    Point workingCenter(workingRect.x+subImageWidth/2,workingRect.y+subImageHeight/2);
+    Rect myRect((frameWidth-subImageWidth)/2,frameHeight/2+(frameHeight/2-subImageHeight)/2,subImageWidth,subImageHeight);
+    Rect templateRect((myRect.width-templateWidth)/2,(myRect.height-templateHeight)/2,templateWidth,templateHeight);
+    Point workingCenter(myRect.x+subImageWidth/2,myRect.y+subImageHeight/2);
 
     capture.set(CV_CAP_PROP_FRAME_WIDTH,frameWidth);
     capture.set(CV_CAP_PROP_FRAME_HEIGHT,frameHeight);
@@ -48,7 +48,7 @@ Mat Interfacecam::framesInterface(){
 
     cv::flip(frame1,frame1,1);
     // Extrait le rectange 1 et le convertit en gray
-    cv::cvtColor(Mat(frame1,workingRect),frameRect1,COLOR_BGR2GRAY);
+    cv::cvtColor(Mat(frame1,myRect),frameRect1,COLOR_BGR2GRAY);
     //Mat(frame1,rect).copyTo(frameRect1);
 
     // Crée une correspondance avec l'image de résultat
@@ -64,7 +64,7 @@ Mat Interfacecam::framesInterface(){
         // Effet miroir pour avoir les gestes devant la caméra du bon côté
         cv::flip(frame2,frame2,1);
         // Extraction de la zone de travail (ici un rectangle) de la frame 2 et conversion en gray
-        cv::cvtColor(Mat(frame2,workingRect),frameRect2,COLOR_BGR2GRAY);
+        cv::cvtColor(Mat(frame2,myRect),frameRect2,COLOR_BGR2GRAY);
 
         // Extraction de l'image modèle dans la frame 1
         Mat templateImage(frameRect1,templateRect);
@@ -76,7 +76,7 @@ Mat Interfacecam::framesInterface(){
         // Réalise la translation du vecteur entre l'origine et le correspondant
         Point vect(maxLoc.x-templateRect.x,maxLoc.y-templateRect.y);
         // Trace le rectangle vert (zone active à la caméra) et le vecteur de déplacement selon le mouvement de la main
-        rectangle(frame2,workingRect,Scalar( 0, 255, 0),2);
+        rectangle(frame2,myRect,Scalar( 0, 255, 0),2);
         Point p(workingCenter.x+vect.x,workingCenter.y+vect.y);
         // récupère le mouvement afin d'afficher en sortie d'application la direction de la main
         arrowedLine(frame2,workingCenter,p,Scalar(255,255,255),2);

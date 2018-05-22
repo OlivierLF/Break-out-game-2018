@@ -34,6 +34,7 @@ private:
     int frameHeight;
     int subImageWidth;
     int subImageHeight;
+    // largeur de l'image
     int templateWidth;
     int templateHeight;
     // définition des matrices des différentes frames et rectangles
